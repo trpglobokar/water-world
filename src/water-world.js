@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import L from "leaflet"
-import topoContors from "./topocontours.json"
+import topoContors from "./static/topo-contours.json"
 import { Slider } from "@material-ui/core"
 
-export default class App extends Component {
+export default class WaterWorld extends Component {
   constructor(props) {
     super(props)
 
