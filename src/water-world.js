@@ -2,14 +2,27 @@ import React, { Component } from "react"
 import L from "leaflet"
 import topoContors from "./static/topo-contours.json"
 import { Slider } from "@material-ui/core"
+import styled from "styled-components"
+
+
+const MapContainer = styled.div`
+  height: 100vh;
+  background-color: #aad3df;
+`
+const MapControls = styled.div`
+  height: calc(100vh - 32px);
+  width: "100px";
+  background-color: #fff;
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 999;
+  border-radius: 4px;
+`
 
 export default class WaterWorld extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      waterLevel: 0
-    }
+  state = {
+    waterLevel: 0
   }
 
   componentDidMount() {
@@ -35,13 +48,11 @@ export default class WaterWorld extends Component {
 
   coolStyle = feature => {
     const elevation = feature.properties.elevation
+    const isBelowWaterLevel = elevation < this.state.waterLevel
   
-    const fillColor = elevation < this.state.waterLevel ? "#aad3df" : "#060"
-    //const fillColor = elevation !== 0 ? "#aad3df" : "#060"
-    const fillOpacity = elevation < this.state.waterLevel ? 1 : 0.3
-    //const fillOpacity = elevation === 0 ? 1 : 0
+    const fillColor = isBelowWaterLevel ? "#aad3df" : "#060"
+    const fillOpacity = isBelowWaterLevel ? 1 : 0.3
     const weight = elevation === 0 ? 1 : 0
-
 
     return {
       fillColor,
@@ -56,18 +67,8 @@ export default class WaterWorld extends Component {
   render() {
     return (
       <div>
-        <div id="map" style={{ height: "100vh", backgroundColor: "#aad3df" }} />
-        <div
-          style={{
-            height: "calc(100vh - 32px)",
-            width: "100px",
-            backgroundColor: "#fff",
-            position: "fixed",
-            top: "16px",
-            right: "16px",
-            zIndex: 999,
-          }}
-        >
+        <MapContainer id="map" />
+        <MapControls>
         <div style={{padding: "16px", height: "calc(100% - 32px)", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <Slider
             orientation="vertical"
@@ -75,7 +76,6 @@ export default class WaterWorld extends Component {
             aria-labelledby="vertical-slider"
             onChange={(_event, value) => {
               this.setState({waterLevel: value})
-              //setRating(value)
             }}
             step={800}
             marks
@@ -83,7 +83,7 @@ export default class WaterWorld extends Component {
             max={20000}
           />
         </div>
-        </div>
+        </MapControls>
       </div>
     )
   }
