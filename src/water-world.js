@@ -11,7 +11,8 @@ const MapContainer = styled.div`
 `
 const MapControls = styled.div`
   height: calc(100vh - 32px);
-  width: "100px";
+  max-height: 400px;
+  width: 120px;
   background-color: #fff;
   position: fixed;
   top: 16px;
@@ -19,10 +20,35 @@ const MapControls = styled.div`
   z-index: 999;
   border-radius: 4px;
 `
+const SliderLabel = styled.div`
+  text-align: center;
+  margin-bottom: 16px;
+`
+const MapControlsSpacer = styled.div`
+  padding: 16px;
+  height: calc(100% - 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  & .MuiSlider-valueLabel {
+    top: -48px;
+    left: calc(-50% + -12px);
+    &>span {
+      width: 48px;
+      height: 48px;
+    }
+  }
+`
 
 export default class WaterWorld extends Component {
-  state = {
-    waterLevel: 0
+  constructor (props) {
+    super(props)
+    //const classes = useStyles()
+
+    this.state = {
+      waterLevel: 0
+    }
   }
 
   componentDidMount() {
@@ -69,20 +95,26 @@ export default class WaterWorld extends Component {
       <div>
         <MapContainer id="map" />
         <MapControls>
-        <div style={{padding: "16px", height: "calc(100% - 32px)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <Slider
-            orientation="vertical"
-            defaultValue={0}
-            aria-labelledby="vertical-slider"
-            onChange={(_event, value) => {
-              this.setState({waterLevel: value})
-            }}
-            step={800}
-            marks
-            min={0}
-            max={20000}
-          />
-        </div>
+          <MapControlsSpacer>
+            <SliderLabel>
+              Sea Level<br />
+              {this.state.waterLevel} Feet
+            </SliderLabel>
+            <Slider
+              orientation="vertical"
+              defaultValue={0}
+              valueLabelDisplay="auto"
+              valueLabelFormat={x => `${x}ft`}
+              aria-labelledby="vertical-slider"
+              onChange={(_event, value) => {
+                this.setState({waterLevel: value})
+              }}
+              step={800}
+              marks
+              min={0}
+              max={20000}
+            />
+          </MapControlsSpacer>
         </MapControls>
       </div>
     )
