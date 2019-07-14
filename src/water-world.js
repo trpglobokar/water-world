@@ -54,8 +54,13 @@ export default class WaterWorld extends Component {
   componentDidMount() {
     // create map
     this.map = L.map("map", {
-      center: [0, 0],
-      zoom: 2,
+      center: [42, -90],
+      zoom: 3,
+      minZoom: 2,
+      maxBounds: [
+          [90, -290],
+          [-68, 172]
+      ]
     })
 
     /*L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
