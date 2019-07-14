@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import L from "leaflet"
-import topoContors from "./static/topo-contours.json"
+import topoContors from "./static/topo-contours1.json"
 import { Slider } from "@material-ui/core"
 import styled from "styled-components"
 
@@ -52,6 +52,8 @@ export default class WaterWorld extends Component {
   }
 
   componentDidMount() {
+    let tempTransform = topoContors.features[0].geometry.coordinates
+
     // create map
     this.map = L.map("map", {
       center: [42, -90],
@@ -59,13 +61,18 @@ export default class WaterWorld extends Component {
       minZoom: 2,
       maxBounds: [
           [90, -290],
-          [-68, 172]
+          [-66, 171]
       ]
     })
 
-    /*L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map)*/
+    this.map.createPane('labels')
+    this.map.getPane('labels').style.zIndex = 650
+    this.map.getPane('labels').style.pointerEvents = 'none'
+
+    var positronLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+        attribution: '©OpenStreetMap, ©CartoDB',
+        pane: 'labels'
+    }).addTo(this.map)
 
     this.geoJson = L.geoJson(topoContors, { style: this.coolStyle }).addTo(this.map)
   }
