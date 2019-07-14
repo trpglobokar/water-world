@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/water-world/static/css/main.34de6062.chunk.css",
+    "main.js": "/water-world/static/js/main.3c9d972e.chunk.js",
+    "main.js.map": "/water-world/static/js/main.3c9d972e.chunk.js.map",
+    "runtime~main.js": "/water-world/static/js/runtime~main.46eb4481.js",
+    "runtime~main.js.map": "/water-world/static/js/runtime~main.46eb4481.js.map",
+    "static/js/2.7fdb500f.chunk.js": "/water-world/static/js/2.7fdb500f.chunk.js",
+    "static/js/2.7fdb500f.chunk.js.map": "/water-world/static/js/2.7fdb500f.chunk.js.map",
+    "index.html": "/water-world/index.html",
+    "precache-manifest.ca1db98832addf3fe7489e7ed4fbfdfb.js": "/water-world/precache-manifest.ca1db98832addf3fe7489e7ed4fbfdfb.js",
+    "service-worker.js": "/water-world/service-worker.js",
+    "static/css/main.34de6062.chunk.css.map": "/water-world/static/css/main.34de6062.chunk.css.map"
+  }
+}
