@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/water-world/precache-manifest.54298e7a400da5fffc90717cd96b2edb.js"
+  "/water-world/precache-manifest.b6f03a3e460fb2881a68df851233b4b4.js"
 );
 
 self.addEventListener('message', (event) => {
